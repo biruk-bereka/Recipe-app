@@ -1,0 +1,28 @@
+<section class="flex flex-col justify-center items-center w-4/5">
+  <h1>New Recipe </h1>
+  <%= form_with url: recipes_path, method: :post, :class => 'w-full flex flex-col items-center', local: true, scope: :recipe do |f| %>
+    <label class="relative inline-flex items-center mr-5 cursor-pointer self-end">
+      <%= f.check_box :public, class:"sr-only peer" %>
+      <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+      <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"><%= f.label :public %></span>
+    </label>
+    <div class="w-full">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="w-full">
+      <%= f.label :preparation_time %><br>
+      <%= f.text_field :preparation_time %>
+    </div>
+    <div class="w-full">
+      <%= f.label :cooking_time %><br>
+      <%= f.text_field :cooking_time %>
+    </div>
+    <div class="w-full">
+      <%= f.label :description %><br>
+      <%= f.text_area :description,  :maxlength => 250 %>
+    </div>
+    <%= f.submit "Create recipe", class: "p-3
+    rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %> 
+  <% end %>
+</section>
