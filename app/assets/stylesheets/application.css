@@ -10,3 +10,21 @@
     height: 0;
   }
 }
+
+textarea {
+  resize: none;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+input[type="text" i], textarea {
+  width: 100%;
+}
+
+li.recipes {
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+}

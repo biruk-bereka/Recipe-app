@@ -1,0 +1,23 @@
+<section class="flex flex-col w-full items-center gap-4">
+  <h2 class="text-lg font-bold"><%=current_user.name %></h2>
+  <%= button_to "Add Recipe", new_recipe_path, method:'get', class: "p-3
+    rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %> 
+  <ul class="recipes-list flex flex-col justify-start items-center w-4/5 gap-4">
+      <% @recipes.each do |recipe| %>
+        <li class="recipes flex w-full">
+          <div class="flex flex-col w-2/4">
+            <%= link_to recipe_path(recipe.id), remote: false do %>
+              <span> <%= recipe.name %> </span>
+            <% end %>
+            <%= button_to 'Delete', recipe_path(recipe.id), method: 'delete', class: 'font-medium text-red-600 dark:text-blue-500 hover:underline' %>
+          </div>
+          <div class="flex flex-col w-2/4">
+            <%= link_to recipe_path(recipe.id), remote: false do %>
+              <span> <%= recipe.description %> </span>
+            <% end %>
+          </div>
+        </li>
+      
+    <% end %>
+  </ul>
+</section>
