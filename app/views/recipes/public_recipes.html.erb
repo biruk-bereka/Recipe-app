@@ -1,0 +1,8 @@
+<h1>Public recipes</h1>
+<ul>
+    <% @public_recipes.each do |recipe| %>
+       <li>
+          <%= recipe.name %>
+       </li>
+    <% end %>    
+</ul>

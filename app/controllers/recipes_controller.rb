@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
-      redirect_to @recipe, notice: "Recipe was successfully updated."
+      redirect_to @recipe, notice: 'Recipe was successfully updated.'
     else
       render :edit
     end
@@ -43,12 +43,11 @@ class RecipesController < ApplicationController
     flash[:notice] = 'Recipe has been deleted!'
     redirect_to recipes_path
   end
-  
+
 
   private
 
   def recipe_params
     params.require(:recipe).permit(:public)
   end
-
 end

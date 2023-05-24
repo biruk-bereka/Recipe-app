@@ -1,0 +1,19 @@
+<nav>
+  <ul class="flex justify-center items-baseline gap-5">
+    <li
+      class="text-center block border <%= current_page?(root_path) ? 'border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white' : 'border-white hover:border-gray-200 text-blue-500 hover:bg-gray-200' %>"
+    >
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li
+      class="text-center block border <%= current_page?(recipes_path) ? 'border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white' : 'border-white hover:border-gray-200 text-blue-500 hover:bg-gray-200' %>"
+    >
+      <%= link_to 'Recipes', recipes_path %>
+    </li>
+    <li
+      class="text-center block border <%= current_page?(public_recipes_path) ? 'border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white' : 'border-white hover:border-gray-200 text-blue-500 hover:bg-gray-200' %>"
+    >
+      <%= link_to 'Public Recipes', public_recipes_path %>
+    </li>
+  </ul>
+</nav>
