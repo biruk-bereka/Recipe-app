@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+
   def index
     @user = User.includes(:recipes).find(current_user.id)
     @recipes = @user.recipes
@@ -19,6 +20,7 @@ class RecipesController < ApplicationController
     @new_recipe = Recipe.new(params.require(:recipe).permit(:name, :public, :cooking_time, :preparation_time,
                                                             :description))
     @new_recipe.user = current_user
+    authorize! :create, @new_recipe
     respond_to do |format|
       if @new_recipe.save
         format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
@@ -30,6 +32,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+    authorize! :update, @recipe
     if @recipe.update(recipe_params)
       redirect_to @recipe, notice: 'Recipe was successfully updated.'
     else
@@ -39,11 +42,15 @@ class RecipesController < ApplicationController
 
   def destroy
     recipe = Recipe.find(params[:id])
+    authorize! :destroy, recipe
     recipe.destroy
     flash[:notice] = 'Recipe has been deleted!'
     redirect_to recipes_path
   end
-
+  
+  def public_recipes
+    @recipes = Recipe.where(public: true).order('created_at DESC')
+  end
 
   private
 

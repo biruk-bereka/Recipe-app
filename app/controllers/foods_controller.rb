@@ -1,6 +1,8 @@
 class FoodsController < ApplicationController
+  
   def index
-    @foods = Food.all
+    @user = User.includes(:foods).find(current_user.id)
+    @foods = @user.foods
   end
 
   def new
@@ -9,7 +11,8 @@ class FoodsController < ApplicationController
 
   def create
     @food = Food.new(foods_params)
-
+    authorize! :create, @food
+    
     if @food.valid?
       @food.save
       flash[:notice] = 'Food added successfully'
@@ -23,7 +26,9 @@ class FoodsController < ApplicationController
 
   def destroy
     food = Food.find(params[:id])
+    authorize! :destroy, food
     food.destroy
+    
     flash[:notice] = 'Food has been deleted!'
     redirect_to foods_path
   end

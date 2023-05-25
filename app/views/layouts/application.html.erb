@@ -13,6 +13,7 @@
 
   <body>
     <main class="container mx-auto mt-5 px-5 flex flex-col">
+      <%= render 'shared/navigation' %>
       <div class="flex justify-between">
         <% if current_user %>
         <%= button_to(

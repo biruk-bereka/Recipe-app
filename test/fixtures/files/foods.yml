@@ -1,0 +1,13 @@
+one:
+  name: 'Burger'
+  measurement_unit: 'kg'
+  unit_price: 100
+  quantity: 1
+  user: one
+
+two:
+  name: 'Pizza'
+  measurement_unit: 'kg'
+  unit_price: 200
+  quantity: 1 
+  user: biruk
