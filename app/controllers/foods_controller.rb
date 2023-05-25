@@ -9,6 +9,7 @@ class FoodsController < ApplicationController
 
   def create
     @food = Food.new(foods_params)
+    authorize! :create, @food
 
     if @food.valid?
       @food.save
@@ -23,6 +24,7 @@ class FoodsController < ApplicationController
 
   def destroy
     food = Food.find(params[:id])
+    authorize! :destroy, food
     food.destroy
     flash[:notice] = 'Food has been deleted!'
     redirect_to foods_path
