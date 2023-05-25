@@ -73,8 +73,7 @@
     </div>
     <% if can? :update, @recipe %>
       <div class="flex gap-4">
-        <%= button_to "Generate shopping list", new_recipe_path, method:'get', class: "p-3
-          rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %>
+        <%= link_to 'Generate shopping list', '/general_shopping_list', method:'get', class: "p-3 rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %>
         <%= link_to 'Add ingridient', new_recipe_recipes_food_path(@recipe.id), method:'get', class: "p-3 rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %>
       </div>
     <% end %>

@@ -46,6 +46,31 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  def general_shopping_list
+    @user = User.includes(:recipes, :foods).find(current_user.id)
+    @recipes = @user.recipes
+    @foods = @user.foods
+    @shopping_list = RecipeFood.includes(:food).where(recipe_id: @recipes)
+    @required_food = {}
+    @shopping_list.each do |recipe_food|
+      food = {
+        'food_name' => '',
+        'quantity' => 0,
+        'value' => 0
+      }
+      if @required_food.include?(recipe_food.food.name)
+        @required_food[recipe_food.food.name]['quantity'] -= recipe_food.quantity
+        puts @required_food[recipe_food.food.name]['quantity']
+      else
+        food['food_name'] = recipe_food.food.name
+        food['quantity'] = recipe_food.food.quantity - recipe_food.quantity
+        food['value'] = recipe_food.food.price
+        puts recipe_food.food.name
+        @required_food[recipe_food.food.name] = food
+      end
+    end
+  end
+
   private
 
   def recipe_params
