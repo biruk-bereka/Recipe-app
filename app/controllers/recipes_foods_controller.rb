@@ -18,22 +18,13 @@ class RecipesFoodsController < ApplicationController
   end
 
   def edit
-    # here is the update problem
-    @recipe_food = RecipeFood.includes(:food, :recipe).find(params[:id])
-    @food = @recipe_food.food
-    @recipe = @recipe_food.recipe
-    if @recipe_food.update(recipe_params)
-      redirect_to recipes_path(@recipe_food.recipe_id), notice: 'Recipe_food was successfully updated.'
-    else
-      render :edit
-    end
+    @recipe_food = RecipeFood.find(params[:id])
   end
 
   def update
-    # here is the update problem
     @recipe_food = RecipeFood.find(params[:id])
-    if @recipe_food.update(recipe_params)
-      redirect_to recipes_path(@recipe_food.recipe_id), notice: 'Recipe_food was successfully updated.'
+    if @recipe_food.update(recipe_params_update)
+      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe_food was successfully updated.'
     else
       render :edit
     end
@@ -49,7 +40,10 @@ class RecipesFoodsController < ApplicationController
   private
 
   def recipe_params
-    # here is the update problem
-    params.require(:recipe_food).permit(:quantity, :food_id)
+    params.require(:recipe_food).permit(:food_id, :quantity)
+  end
+
+  def recipe_params_update
+    params.require(:recipe_food).permit(:quantity)
   end
 end

@@ -20,6 +20,7 @@
       </thead>
       <tbody>
         <% @foods.each_with_index do |food, i| %>
+        <% if can? :read, food %>
         <tr
           class="<%= i % 2 != 0 ? 'border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700' : 'bg-white border-b dark:border-gray-700' %>"
         >
@@ -36,6 +37,7 @@
             <%= button_to 'Delete', food_path(food.id), method: 'delete', class: 'font-medium text-red-600 dark:text-blue-500 hover:underline' %>
           </td>
         </tr>
+        <% end %>
         <% end %>
       </tbody>
     </table>
