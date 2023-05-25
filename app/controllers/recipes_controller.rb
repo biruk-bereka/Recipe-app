@@ -53,11 +53,7 @@ class RecipesController < ApplicationController
     @shopping_list = RecipeFood.includes(:food).where(recipe_id: @recipes)
     @required_food = {}
     @shopping_list.each do |recipe_food|
-      food = {
-        'food_name' => '',
-        'quantity' => 0,
-        'value' => 0
-      }
+      food = { 'food_name' => '', 'quantity' => 0, 'value' => 0 }
       if @required_food.include?(recipe_food.food.name)
         @required_food[recipe_food.food.name]['quantity'] -= recipe_food.quantity
         puts @required_food[recipe_food.food.name]['quantity']
