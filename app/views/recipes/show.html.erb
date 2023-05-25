@@ -85,8 +85,10 @@
           <tr>
             <th scope="col" class="px-6 py-3">Food</th>
             <th scope="col" class="px-6 py-3">Quantity</th>
-            <th scope="col" class="px-6 py-3">Unit price</th>
-            <th scope="col" class="px-6 py-3">Actions</th>
+            <th scope="col" class="px-6 py-3">Value</th>
+            <% if can? :update, @recipe %>
+              <th scope="col" class="px-6 py-3">Actions</th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -102,10 +104,12 @@
             </th>
             <td class="px-6 py-4">$<%= recipe_food.quantity %></td>
             <td class="px-6 py-4">$<%= recipe_food.food.price * recipe_food.quantity %></td>
-            <td class="px-6 py-4">
-              <%= button_to 'Modify', edit_recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'get', class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline' %>
-              <%= button_to 'Remove', recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'delete', class: 'font-medium text-red-600 dark:text-blue-500 hover:underline' %>
-            </td>
+            <% if can? :update, @recipe %>
+              <td class="px-6 py-4">
+                <%= button_to 'Modify', edit_recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'get', class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline' %>
+                <%= button_to 'Remove', recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'delete', class: 'font-medium text-red-600 dark:text-blue-500 hover:underline' %>
+              </td>
+            <% end %>
           </tr>
           <% end %>
         </tbody>
