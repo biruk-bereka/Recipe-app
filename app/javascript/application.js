@@ -1,3 +1,16 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
+
+document.addEventListener("DOMContentLoaded", function() {
+  var showModalButton = document.getElementById("showModalButton");
+  var modal = document.getElementById("foodModal");
+  var closeButton = document.getElementsByClassName("close")[0];
+
+  showModalButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    modal.style.display = "block";
+  });
+
+  closeButton.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+});

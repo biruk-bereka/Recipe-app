@@ -5,7 +5,9 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(recipe_foods: :food).find(params[:id])
+    @foods = Food.all
+    @recipes_foods = @recipe.recipe_foods
   end
 
   def new
@@ -43,7 +45,6 @@ class RecipesController < ApplicationController
     flash[:notice] = 'Recipe has been deleted!'
     redirect_to recipes_path
   end
-
 
   private
 
