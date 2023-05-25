@@ -46,6 +46,11 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  def public_recipes
+    @recipes = Recipe.includes(recipe_foods: :food).where(public: true).order('created_at DESC')
+  end
+
+
   private
 
   def recipe_params
