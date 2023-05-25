@@ -14,7 +14,7 @@
                <% recipe.recipe_foods.each do |recipe_food| %>
                   <% total_price += recipe_food.food.price * recipe_food.quantity %>
                <% end %>
-               <%= total_price %>
+               $<%=total_price %>
             </p>
          </div>
        </li>
