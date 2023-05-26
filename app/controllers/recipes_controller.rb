@@ -49,6 +49,10 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  def public_recipes
+    @recipes = Recipe.includes(recipe_foods: :food).where(public: true).order('created_at DESC')
+  end
+
   def general_shopping_list
     @user = User.includes(:recipes, :foods).find(current_user.id)
     @recipes = @user.recipes
