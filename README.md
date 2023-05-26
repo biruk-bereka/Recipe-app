@@ -51,8 +51,14 @@
 </details>
 
 ### Key Features <a name="key-features"></a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- **ORM**
+- **ROR**
+- **Linters usage**
+- **Test with Rspec**
+- **Test with Capybara**
+- **Authorization**
+- **Authentication**
+- **MVC**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -96,7 +102,7 @@ explorer .
 
 ### Usage
 
-To run the project, if you are on the blogify folder path on your terminal you can execute the following command:
+To run the project, if you are on the Recipe-app folder path on your terminal you can execute the following command:
 
 ```
 code .
@@ -138,7 +144,8 @@ This project is not deployed
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
-  
+- **Deploy**
+- **Make improvements with feedbacks**  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
