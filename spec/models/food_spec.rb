@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  let(:user) { User.new(name: 'Nelson', email:'nels@nels.com', password:'shinra') }
-  subject { Food.new(user_id: user.id, name:'Apple', measurement_unit: 'grams', price: 10, quantity: 10) }
+  let(:user) { User.new(name: 'Nelson', email: 'nels@nels.com', password: 'shinra') }
+  subject { Food.new(user_id: user.id, name: 'Apple', measurement_unit: 'grams', price: 10, quantity: 10) }
   before do
     user.save
     subject.save
   end
-  
+
   it 'Quantity should be present, expected false' do
     subject.quantity = nil
     expect(subject).to_not be_valid

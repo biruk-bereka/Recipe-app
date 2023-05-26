@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :system do
-  let(:user) { User.new(name: 'Nelson', email:'nels@nels.com', password:'shinra') }
+  let(:user) { User.new(name: 'Nelson', email: 'nels@nels.com', password: 'shinra') }
 
   before do
     ActionMailer::Base.deliveries.clear
@@ -20,13 +20,13 @@ RSpec.describe User, type: :system do
       click_button 'Sign up'
 
       # Retrieve the confirmation email
-      path_regex = /(?:"https?\:\/\/.*?)(\/.*?)(?:")/
+      path_regex = %r{(?:"https?://.*?)(/.*?)(?:")}
       email = ActionMailer::Base.deliveries.last
       path = email.body.match(path_regex)[1]
 
       # Visit the confirmation link
       visit path
-      
+
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
@@ -37,5 +37,4 @@ RSpec.describe User, type: :system do
       # Assert that the user is redirected to the root page
     end
   end
-
 end

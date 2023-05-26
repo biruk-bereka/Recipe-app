@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :system do
-  let(:user) { User.new(name: 'Biruk', email:'biruk@example.com', password:'password') }
-  subject { Recipe.new(user_id: user.id, description:'This is my description', name: 'Recipe 1', public: true, preparation_time: 1.0, cooking_time: 1.0) }
+  let(:user) { User.new(name: 'Biruk', email: 'biruk@example.com', password: 'password') }
+  subject do
+    Recipe.new(user_id: user.id, description: 'This is my description', name: 'Recipe 1', public: true,
+               preparation_time: 1.0, cooking_time: 1.0)
+  end
 
-  before do 
+  before do
     ActionMailer::Base.deliveries.clear
     user.save
     subject.save
   end
 
   it 'show the public recipes list' do
-    
     visit new_user_registration_path
     # Fill in the sign-in form with valid user credentials
     fill_in 'Name', with: user.name
@@ -21,7 +23,7 @@ RSpec.describe Recipe, type: :system do
     click_button 'Sign up'
 
     # Retrieve the confirmation email
-    path_regex = /(?:"https?\:\/\/.*?)(\/.*?)(?:")/
+    path_regex = %r{(?:"https?://.*?)(/.*?)(?:")}
     email = ActionMailer::Base.deliveries.last
     path = email.body.match(path_regex)[1]
 

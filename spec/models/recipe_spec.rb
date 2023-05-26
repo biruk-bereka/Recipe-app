@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  let(:user) { User.new(name: 'Nelson', email:'nels@nels.com', password:'shinra') }
-  subject { Recipe.new(user_id: user.id, description:'This is my description', name: 'Recipe 1', public: true, preparation_time: 1.0, cooking_time: 1.0) }
+  let(:user) { User.new(name: 'Nelson', email: 'nels@nels.com', password: 'shinra') }
+  subject do
+    Recipe.new(user_id: user.id, description: 'This is my description', name: 'Recipe 1', public: true,
+               preparation_time: 1.0, cooking_time: 1.0)
+  end
 
-  before do 
-    user.save 
+  before do
+    user.save
     subject.save
   end
 
