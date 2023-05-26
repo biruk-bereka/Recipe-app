@@ -16,7 +16,9 @@
     <main class="container mx-auto mt-5 px-5 flex flex-col">
       
       <div class="flex justify-between items-center px-10 ">
-        <%= render 'shared/navigation' %>
+        <% if current_user %>
+          <%= render 'shared/navigation' %>
+        <% end %>
         <div class="hide">
           <p class="notice flex items-center bg-blue-500 text-white text-sm font-bold" role="alert"><%= notice %></p>
           <p class="alert flex items-center bg-blue-500 text-white text-sm font-bold" role="alert"><%= alert %></p>
