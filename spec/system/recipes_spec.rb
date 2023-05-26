@@ -10,7 +10,7 @@ RSpec.describe Recipe, type: :system do
     subject.save
   end
 
-  # INDEX PAGE CAPYBARA
+  # INDEX Recipes PAGE CAPYBARA
   it 'show the recipes list' do
     
     visit new_user_registration_path
@@ -36,7 +36,8 @@ RSpec.describe Recipe, type: :system do
     expect(page).to have_content(subject.name)
   end
 
-  it 'create recipe' do
+  # New Recipes PAGE CAPYBARA
+  it 'create recipe path' do
     
     visit new_user_registration_path
     # Fill in the sign-in form with valid user credentials
@@ -62,8 +63,28 @@ RSpec.describe Recipe, type: :system do
 
     click_button 'Add Recipe'
 
-    expect(page).to have_current_path(root_path)
+    expect(page).to have_current_path(new_recipe_path)
     
   end
 
+  # Show Recipes PAGE CAPYBARA
+  it 'Navigate to especific recipe path' do
+    visit new_user_registration_path
+    fill_in 'Name', with: user.name
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    fill_in 'Password confirmation', with: user.password
+    click_button 'Sign up'
+    path_regex = /(?:"https?\:\/\/.*?)(\/.*?)(?:")/
+    email = ActionMailer::Base.deliveries.last
+    path = email.body.match(path_regex)[1]
+    visit path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log in'
+
+    visit recipes_path(subject.id)
+
+    expect(page).to have_content(subject.name)
+  end
 end
