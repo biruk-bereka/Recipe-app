@@ -1,34 +1,42 @@
 <% if @recipe.user == current_user || @recipe.public %>
-  <section class="flex flex-col w-full items-center gap-4">
-    <h2 class="text-lg font-bold"><%= @recipe.name %></h2>
-    <% if can? :update, @recipe %>
-      <%= form_with(model: @recipe, url: recipe_path(@recipe), method: :put) do |form| %>
-        <label class="relative inline-flex items-center mr-5 cursor-pointer self-end">
-          <%= form.check_box :public, class:"sr-only peer", onchange: "this.form.submit();"  %>
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
-          <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"><%= form.label :public %></span>
-        </label>
+  <section class="flex flex-col  gap-4">
+    <h2 class="text-lg text-center font-bold"><%= @recipe.name %></h2>
+    <div class="flex justify-around">
+      <div>
+        <div class="self-start flex gap-4">
+          <h2 class="font-bold">Preparation time: </h2>
+          <h2><%= @recipe.preparation_time %></h2>
+        </div>
+        <div class="self-start flex gap-4">
+          <h2 class="font-bold">Cooking time: </h2>
+          <h2><%= @recipe.cooking_time %></h2>
+        </div>
+        <div class="self-start flex gap-4">
+          <h2 class="font-bold">Description: </h2>
+          <h2><%= @recipe.description %></h2>
+        </div>
+      </div>
+     
+      <div>
+        <% if can? :update, @recipe %>
+        <%= form_with(model: @recipe, url: recipe_path(@recipe), method: :put) do |form| %>
+          <label class="relative inline-flex items-center mr-5 cursor-pointer self-end">
+            <%= form.check_box :public, class:"sr-only peer", onchange: "this.form.submit();"  %>
+            <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"><%= form.label :public %></span>
+          </label>
+        <% end %>
       <% end %>
-    <% end %>
-    <div class="self-start flex gap-4">
-      <h2 class="font-bold">Preparation time: </h2>
-      <h2><%= @recipe.preparation_time %></h2>
+      </div>
     </div>
-    <div class="self-start flex gap-4">
-      <h2 class="font-bold">Cooking time: </h2>
-      <h2><%= @recipe.cooking_time %></h2>
-    </div>
-    <div class="self-start flex gap-4">
-      <h2 class="font-bold">Description: </h2>
-      <h2><%= @recipe.description %></h2>
-    </div>
-    <% if can? :update, @recipe %>
-      <div class="flex gap-4">
+    <div class="flex flex-col">
+      <% if can? :update, @recipe %>
+      <div class="flex justify-around">
         <%= link_to 'Generate shopping list', '/general_shopping_list', method:'get', class: "p-3 rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %>
         <%= link_to 'Add ingridient', new_recipe_recipes_food_path(@recipe.id), method:'get', class: "p-3 rounded-full bg-emerald-200 text-end mb-3 justify-self-end" %>
       </div>
     <% end %>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead
           class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -56,7 +64,7 @@
             <td class="px-6 py-4">$<%= recipe_food.quantity %></td>
             <td class="px-6 py-4">$<%= recipe_food.food.price * recipe_food.quantity %></td>
             <% if can? :update, @recipe %>
-              <td class="px-6 py-4">
+              <td class="flex gap-5 px-6 py-4">
                 <%= button_to 'Modify', edit_recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'get', class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline' %>
                 <%= button_to 'Remove', recipe_recipes_food_path(@recipe.id, recipe_food.id), method: 'delete', class: 'font-medium text-red-600 dark:text-blue-500 hover:underline' %>
               </td>
@@ -66,7 +74,7 @@
         </tbody>
       </table>
     </div>
-
+    </div>
   </section>
 <% else %>
   <section class="flex flex-col w-full items-center gap-4">

@@ -1,5 +1,16 @@
-<section class="flex flex-col w-full items-center gap-4">
-  <h1>Shopping List </h1>
+<section class="flex flex-col w-full items-center gap-4 mt-12">
+  <h1 class="font-black text-2xl text-center mb-5">Shopping List </h1>
+   <div class="flex gap-6">
+      <p>Amount of food items to buy: <%=@shopping_list.count%></p>
+      <p>
+          Total price: 
+          <% total_price = 0 %>
+          <% @required_food.each do |food| %>
+              <% total_price += food[1]['value'] * food[1]['quantity'] * -1 %>
+          <% end %>
+          $<%=total_price %>
+      </p>
+   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead
