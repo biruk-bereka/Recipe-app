@@ -6,6 +6,7 @@ class RecipesFoodsController < ApplicationController
   def create
     @new_recipe_food = RecipeFood.new(recipe_params)
     @new_recipe_food.recipe_id = params[:recipe_id]
+    authorize! :create, @new_recipe_food
     respond_to do |format|
       if @new_recipe_food.save
         format.html { redirect_to "/recipes/#{params[:recipe_id]}", notice: 'Recipe_food was successfully created.' }
@@ -23,6 +24,7 @@ class RecipesFoodsController < ApplicationController
 
   def update
     @recipe_food = RecipeFood.find(params[:id])
+    authorize! :update, @recipe_food
     if @recipe_food.update(recipe_params_update)
       redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Recipe_food was successfully updated.'
     else
@@ -32,6 +34,7 @@ class RecipesFoodsController < ApplicationController
 
   def destroy
     recipe_food = RecipeFood.find(params[:id])
+    authorize! :destroy, recipe_food
     recipe_food.destroy
     flash[:notice] = 'Recipe has been deleted!'
     redirect_to "/recipes/#{params[:recipe_id]}"
